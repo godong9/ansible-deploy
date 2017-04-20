@@ -6,6 +6,14 @@ Ansible deploy project
 $ brew install ansible
 ```
 
+# Add deploy user
+```
+$ sudo adduser deploy
+$ sudo visudo
+
+    deploy ALL=(ALL:ALL) ALL
+```
+
 # Server setup (Ubuntu)
 ```
 $ ansible-playbook -i inventories/{{stage}} server_setup.yml
