@@ -1,0 +1,12 @@
+---
+- name: Start nginx
+  service: name=nginx state=started
+  when: start is defined
+
+- name: Stop nginx
+  service: name=nginx state=stopped
+  when: stop is defined
+
+- name: Restart nginx
+  service: name=nginx state=restarted
+  when: restart is defined

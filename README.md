@@ -26,6 +26,10 @@ $ sudo apt update; sudo apt install oracle-java8-installer
 $ sudo apt install oracle-java8-set-default
 ```
 
+# Nginx service
+```
+$ ansible-playbook -i inventories/{{stage}} nginx_service.yml -e start=true
+```
 
 ## 참고
 [Ansible Best Practices](http://docs.ansible.com/ansible/playbooks_best_practices.html)
