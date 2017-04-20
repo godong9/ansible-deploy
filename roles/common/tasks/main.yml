@@ -1,0 +1,18 @@
+---
+- include: devel.yml
+
+- name: List contents of root_path directory
+  command: ls {{ root_path }}
+  register: root_contents
+
+- name: Creates archive directory
+  when: root_contents.stdout == ""
+  file: path={{ archive_path }} state=directory owner={{ default_user }} group={{ default_group }}
+
+- name: Creates service directory
+  when: root_contents.stdout == ""
+  file: path={{ service_path }} state=directory owner={{ default_user }} group={{ default_group }}
+
+- name: Creates script directory
+  when: root_contents.stdout == ""
+  file: path={{ script_path }} state=directory owner={{ default_user }} group={{ default_group }}

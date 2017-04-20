@@ -1,0 +1,11 @@
+---
+- name: Setup server
+  hosts: server
+  remote_user: "{{ default_user }}"
+  become: yes
+  become_method: sudo
+  vars_files:
+    - group_vars/all.yml
+
+  roles:
+    - common

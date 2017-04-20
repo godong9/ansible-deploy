@@ -1,0 +1,7 @@
+# common
+root_path: /home/deploy
+archive_path: /home/deploy/archive
+service_path: /home/deploy/service
+script_path: /home/deploy/scripts
+default_user: deploy
+default_group: deploy
