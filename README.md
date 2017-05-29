@@ -19,7 +19,7 @@ $ sudo visudo
 $ ansible-playbook -i inventories/{{stage}} server_setup.yml
 ```
 
-# Java setup
+# Java setup (실행 X -> devel.yml에 포함됨)
 ```
 $ sudo add-apt-repository ppa:webupd8team/java
 $ sudo apt update; sudo apt install oracle-java8-installer
