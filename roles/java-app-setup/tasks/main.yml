@@ -1,0 +1,9 @@
+---
+- name: Make application directory
+  file: path={{ service_path }}/{{ app_name }} state=directory
+
+- name : Make backup directory
+  file : dest="{{ backup_path }}" state=directory
+
+- name: Copy serverctl shell script
+  template: src=serverctl.sh.j2 dest={{ service_path }}/{{ app_name }}/serverctl.sh mode=0744

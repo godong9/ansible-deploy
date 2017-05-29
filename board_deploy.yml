@@ -1,0 +1,21 @@
+#!/usr/bin/env ansible-playbook
+
+---
+- name: Deploy board
+  hosts: server
+  remote_user: "{{ default_user }}"
+  become: no
+  serial: 1
+  vars_files:
+    - group_vars/all.yml
+  vars:
+    app_name: board
+    app_jar: board.jar
+    start_wait_sec: 25
+  max_fail_percentage: 0
+  roles:
+    - java-app-setup
+    - java-app-stop
+    - java-app-deploy
+    - java-app-start
+    - web-healthcheck

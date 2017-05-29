@@ -1,0 +1,6 @@
+---
+- name: Start application
+  command: ./serverctl.sh start chdir={{ service_path }}/{{ app_name }}/
+
+- name: Wait for start
+  command: sleep {{ start_wait_sec }}

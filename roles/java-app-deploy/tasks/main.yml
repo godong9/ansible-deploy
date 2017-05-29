@@ -1,0 +1,21 @@
+---
+- name: Check deploy jar file
+  stat: path={{ upload_path }}/{{ app_jar }}
+  register: check_jar
+
+- name: Deploy jar file must be exist
+  debug: msg="Deploy jar file must be exist"
+  failed_when: not check_jar.stat.exists
+
+- name: Remove old backup jar
+  file: path={{ backup_path }}/{{ app_jar }} state=absent
+
+- name: Backup jar
+  copy: remote_src=True src={{ service_path }}/{{ app_name }}/{{ app_jar }} dest={{ backup_path }}/
+  ignore_errors: true
+
+- name: Remove app jar
+  file: path={{ service_path }}/{{ app_name }}/{{ app_jar }} state=absent
+
+- name: Deploy jar
+  copy: remote_src=True src={{ upload_path }}/{{ app_jar }} dest={{ service_path }}/{{ app_name }}/

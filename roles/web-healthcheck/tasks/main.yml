@@ -1,0 +1,15 @@
+---
+- name: Copy healthcheck shell script
+  template: src=healthcheck.sh.j2 dest={{ service_path }}/{{ app_name }}/healthcheck.sh mode=0744
+
+- name: healthcheck
+  command: ./healthcheck.sh chdir={{ service_path }}/{{ app_name }}/
+  register: check_result
+  failed_when: check_result.stdout_lines[0] == 'DOWN'
+  changed_when: False
+  tags:
+    - health
+
+- debug: msg={{ check_result.stdout_lines }}
+  tags:
+    - health

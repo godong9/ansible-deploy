@@ -1,0 +1,52 @@
+#!/bin/bash
+SERVICEPID="{{ app_name }}.pid"
+
+case $1 in
+  "start")
+    JAVA_OPTS="-Xms{{ jvm_xms }} -Xmx{{ jvm_xmx }}"
+    if [ ! -f $SERVICEPID ]; then
+      app_home={{ service_path }}/{{ app_name }}
+      jar=$app_home/{{ app_jar }}
+      JAVA_OPTS="$JAVA_OPTS {{ java_opts }}"
+      app_parameters="{{ app_params }}"
+
+      EXPR="nohup java $JAVA_OPTS -jar $jar $app_parameters >> $app_home/{{ app_name }}.log 2>&1 &"
+
+      eval $EXPR
+      pid=$!
+      echo $pid > $SERVICEPID
+      echo "Service Started with PID: $pid"
+      sleep 1
+    else
+      echo "$SERVICEPID Exist!, Check if the program is not running already."
+    fi
+    ;;
+  "stop")
+    if [ -f $SERVICEPID ]; then
+      pid=$(<"$SERVICEPID")
+      kill $pid
+      echo -n "Stopping..."
+      while kill -0 $pid >/dev/null 2>&1; do
+        echo -n '.'
+        sleep 0.5
+      done
+      rm -f $SERVICEPID
+      echo
+      echo "Servicewith PID: $pid. Stoped "
+    else
+      echo "$SERVICEPID DON'T Exist!, Check if the program is not halted already."
+    fi
+    ;;
+  "status")
+    if [ ! -f $SERVICEPID ]; then
+      echo "$SERVICEPID DON'T Exist!, Check if the program is not halted already."
+    else
+      pid=$(<"$SERVICEPID")
+      ps $pid
+    fi
+    ;;
+  *)
+    echo "usage:"
+    echo "  start | stop | status"
+    ;;
+esac

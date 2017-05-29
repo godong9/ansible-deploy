@@ -1,0 +1,9 @@
+---
+java_home: /usr/java/default
+jvm_xms: 2g
+jvm_xmx: 2g
+
+jmx_enabled: true
+jmx_port: 8099
+
+start_wait_sec: 10
