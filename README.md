@@ -31,6 +31,11 @@ $ sudo apt install oracle-java8-set-default
 $ ansible-playbook -i inventories/{{stage}} nginx_service.yml -e start=true
 ```
 
+# Board 배포
+```
+$ ansible-playbook -i inventories/{{stage}} board_deploy.yml
+```
+
 ## 참고
 [Ansible Best Practices](http://docs.ansible.com/ansible/playbooks_best_practices.html)
 [Ansible Examples](https://github.com/ansible/ansible-examples)
