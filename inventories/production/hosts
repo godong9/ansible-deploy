@@ -1,8 +1,0 @@
-[server]
-gd-ubuntu-test.pg1.krane.9rum.cc
-
-[kscc-gateway:vars]
-jvm_xms=2g
-jvm_xmx=2g
-java_opts=" -Dspring.profiles.active=production"
-app_params=""

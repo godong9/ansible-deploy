@@ -1,6 +1,6 @@
 ---
 - name: Setup server
-  hosts: server
+  hosts: ec2
   remote_user: "{{ default_user }}"
   become: yes
   become_method: sudo

@@ -19,13 +19,6 @@ $ sudo visudo
 $ ansible-playbook -i inventories/{{stage}} server_setup.yml
 ```
 
-# Java setup (실행 X -> devel.yml에 포함됨)
-```
-$ sudo add-apt-repository ppa:webupd8team/java
-$ sudo apt update; sudo apt install oracle-java8-installer
-$ sudo apt install oracle-java8-set-default
-```
-
 # Nginx service
 ```
 $ ansible-playbook -i inventories/{{stage}} nginx_service.yml -e start=true
